@@ -150,7 +150,7 @@
 <body>
     <div class="outerBox">
         <div id="weathercon">
-            <i class="fa fa-sun-o" aria-hidden="true" style="color: #f1c40f;"></i>
+            <i class="fas fa-sun" aria-hidden="true" style="color: #f1c40f;"></i>
         </div>
         <div class="info">
             <h2><i class="fa fa-street-view" aria-hidden="true" style="color: #16a085;"></i> {%location%}, {%country%}
@@ -168,15 +168,15 @@
         const tempstatus = "{%tempStatus%}";
 
         if (tempstatus == "Sunny") {
-            weathercon.innerHTML = '<i class="fas fa-sun"></i>'
+            weathercon.innerHTML = '<i class="fas fa-sun" style="color: #f1c40f;"></i>'
         } else if (tempstatus == "Clouds") {
-            weathercon.innerHTML = '<i class="fas fa-clouds"></i>'
+            weathercon.innerHTML = '<i class="fas fa-clouds" style="color: grey;"></i>'
         } else if (tempstatus == "Rain") {
-            weathercon.innerHTML = '<i class="fas fa-cloud-rain"></i>'
+            weathercon.innerHTML = '<i class="fas fa-cloud-rain" style="color: lightblue;"></i>'
         }else if (tempstatus == "Haze") {
-            weathercon.innerHTML = '<i class="fad fa-sun-haze"></i>'
+            weathercon.innerHTML = '<i class="fad fa-sun-haze" style="color: #7f8c8d;"></i>'
         }else{
-            weathercon.innerHTML = '<i class="fas fa-sun"></i>'
+            weathercon.innerHTML = '<i class="fas fa-sun" style="color: #f1c40f;"></i>'
         }
         const getcurrentDay = () => {
             let weekday = new Array(7);
