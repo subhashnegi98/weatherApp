@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+    <style>
+        body {
+            background: url('https://source.unsplash.com/user/erondu') no-repeat;
+            background-size: cover;
+        }
+
+        .outerBox {
+            height: 500px;
+            width: 300px;
+            background-color: #fff;
+            margin: 40px auto;
+            position: relative;
+            background: #fff;
+            opacity: 0.8;
+            box-shadow: 3px 3px 20px rgb(0, 0, 0);
+        }
+
+        .info {
+            position: absolute;
+            top: 51%;
+            left: 24%;
+            color: rgb(0, 0, 0);
+
+        }
+
+        #date {
+            position: absolute;
+            top: 57%;
+            left: 22%;
+            color: rgb(0, 0, 0);
+        }
+
+        .temp {
+            position: absolute;
+            top: 75%;
+            left: 40%;
+            color: rgb(0, 0, 0);
+        }
+
+        .tempmin-max {
+            position: absolute;
+            top: 82%;
+            left: 18%;
+            color: rgb(0, 0, 0);
+        }
+
+        .fa-sun {
+            font-size: 7rem;
+            position: absolute;
+            left: 30%;
+            top: 13%;
+        }
+        .fa-clouds{
+            font-size: 7rem;
+            position: absolute;
+            left: 30%;
+            top: 13%;
+        }
+
+        .fa-sun-haze{
+            font-size: 7rem;
+            position: absolute;
+            left: 25%;
+            top: 13%;
+        }
+        .fa-cloud-rain{
+            font-size: 7rem;
+            position: absolute;
+            left: 32%;
+            top: 13%;
+        }
+
+        .fa-street-view {
+            animation: rotate 3s linear infinite alternate;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: translateX(-.5rem);
+            }
+
+            to {
+                transform: translateX(.3rem);
+            }
+        }
+
+        .fa-sun-o {
+            animation: resize 3s linear infinite alternate;
+        }
+
+        @keyframes resize {
+            from {
+                transform: scale(.8);
+            }
+
+            to {
+                transform: scale(1.2);
+            }
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="outerBox">
+        <div id="weathercon">
+            <i class="fa fa-sun-o" aria-hidden="true" style="color: #f1c40f;"></i>
+        </div>
+        <div class="info">
+            <h2><i class="fa fa-street-view" aria-hidden="true" style="color: #16a085;"></i> {%location%}, {%country%}
+            </h2>
+        </div>
+        <p id="date">SUN | JAN 3 | 11:10PM</p>
+        <h1 class="temp">{%temp%}&deg;C</h1>
+        <h3 class="tempmin-max">MIN {%tempmin%}&deg;C | MAX {%tempmax%}&deg;C</h3>
+    </div>
+
+    <script>
+        const currdate = document.getElementById('date');
+        const weathercon = document.getElementById('weathercon');
+
+        const tempstatus = "{%tempStatus%}";
+
+        if (tempstatus == "Sunny") {
+            weathercon.innerHTML = '<i class="fas fa-sun"></i>'
+        } else if (tempstatus == "Clouds") {
+            weathercon.innerHTML = '<i class="fas fa-clouds"></i>'
+        } else if (tempstatus == "Rain") {
+            weathercon.innerHTML = '<i class="fas fa-cloud-rain"></i>'
+        }else if (tempstatus == "Haze") {
+            weathercon.innerHTML = '<i class="fad fa-sun-haze"></i>'
+        }else{
+            weathercon.innerHTML = '<i class="fas fa-sun"></i>'
+        }
+        const getcurrentDay = () => {
+            let weekday = new Array(7);
+            weekday[0] = "Sunday";
+            weekday[1] = "Monday";
+            weekday[2] = "Tuesday";
+            weekday[3] = "Wednesday";
+            weekday[4] = "Thursday";
+            weekday[5] = "Friday";
+            weekday[6] = "Saturday";
+            let currentDay = new Date();
+            let day = weekday[currentDay.getDay()];
+            return day;
+        }
+
+        const getcurrentTime = () => {
+            let months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JULY", "AUG", "SEPT", "OCT", "NOV", "DEC"];
+            let now = new Date();
+            let month = months[now.getMonth()];
+            let day = now.getDate();
+
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+
+            let period = "AM";
+            if (hours > 11) {
+                period = "PM";
+            } if (hours > 12) {
+                hours -= 12;
+            }
+
+            if (minutes < 10) {
+                minutes = "0" + minutes;
+            }
+
+            return `${day} ${month} | ${hours}:${minutes} ${period}`
+        }
+
+        currdate.innerHTML = `${getcurrentDay()} | ${getcurrentTime()}`
+    </script>
+</body>
+
+</html>
